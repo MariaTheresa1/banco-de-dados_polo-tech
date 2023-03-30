@@ -1,5 +1,7 @@
 Projeto Parte 2 - Consultas | BD-PO-001 Turma 926
 
+Grupo 1: Pedro Vitor De Toni, Rodrigo Veras Dos Santos, Maria Theresa De Sousa Ferreira e Guilherme Costa E Silva.
+
 Utilizando o banco de dados da primeira parte do projeto, ou o disponibilizado em sala de aula. Crie consultas SQL para os seguintes problemas:
 
 1. Listar todos os cliente que tem o nome 'ANA'.> Dica: Buscar sobre função Like.

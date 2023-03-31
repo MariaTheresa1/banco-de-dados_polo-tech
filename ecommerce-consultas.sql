@@ -29,4 +29,10 @@ select p.descricao, p.codigo_barras, ie.quantidade from item_estoque ie
 inner join estoque e on ie.id_estoque = e.id
 inner join produto p on ie.id_produto = p.id;
 
+-- 11
+select p.descricao, ic.quantidade, p.valor from cliente c 
+inner join item_carrinho ic on ic.id_cliente = c.id
+inner join produto p on p.id = ic.id_produto
+where c.cpf = '26382080861';
 
+-- 12 

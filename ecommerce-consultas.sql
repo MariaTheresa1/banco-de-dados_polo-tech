@@ -24,6 +24,14 @@ from produto p inner join item_estoque i on p.id = i.id_produto;
 select f.nome, f.cnpj, e.logradouro, e.numero, e.cidade, e.uf 
 from fornecedor f inner join endereco e on f.id_endereco = e.id;
 
+-- 9
+select e.id, p.descricao, ie.quantidade, 
+en.logradouro, en.numero, en.cidade, en.uf
+from produto p
+inner join item_estoque ie on p.id = ie.id_produto
+inner join estoque e on e.id = ie.id_estoque 
+inner join endereco en on en.id = e.id_endereco;
+
 -- 10
 select p.descricao, p.codigo_barras, ie.quantidade from item_estoque ie 
 inner join estoque e on ie.id_estoque = e.id

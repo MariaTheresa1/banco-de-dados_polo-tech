@@ -35,4 +35,10 @@ inner join item_carrinho ic on ic.id_cliente = c.id
 inner join produto p on p.id = ic.id_produto
 where c.cpf = '26382080861';
 
--- 12 
+-- 12
+select c.id, c.nome, c.cpf, count(distinct ic.id_produto) as quant_prod_diferentes
+from cliente c 
+inner join item_carrinho ic on ic.id_cliente = c.id 
+inner join produto p on p.id = ic.id_produto
+group by c.id 
+order by count(p);

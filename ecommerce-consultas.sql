@@ -51,6 +51,72 @@ inner join produto p on p.id = ic.id_produto
 group by c.id 
 order by count(p);
 
+-- 13
+select item_carrinho.id_produto, produto.descricao, item_carrinho.data_insercao, item_carrinho.id_cliente, cliente.nome
+from item_carrinho
+join produto on item_carrinho.id_produto = produto.id 
+join cliente on item_carrinho.id_cliente = cliente.id 
+where item_carrinho.data_insercao < date_trunc('month', current_date - interval '10 months')
+order by item_carrinho.data_insercao;
+
+-- 14
+select endereco.uf, count(distinct cliente.id) as n_clientes
+from cliente
+join endereco on cliente.id_endereco = endereco.id
+group by endereco.uf
+order by n_clientes desc;
+
+-- 15
+select endereco.cidade, count(distinct cliente.id) as n_clientes
+from cliente
+join endereco on cliente.id_endereco = endereco.id
+group by endereco.cidade 
+having count(distinct cliente.id) = (
+	select count(distinct cliente.id) as n_clientes
+	from cliente
+	join endereco on cliente.id_endereco = endereco.id 
+	group by endereco.cidade
+	order by n_clientes desc
+	limit 1
+);
+
+-- 16
+select cliente.nome, pedido.id, pedido.previsao_entrega,
+pedido.status, produto.descricao, item_carrinho.quantidade,
+item_carrinho.quantidade * produto.valor as valor_total_pago
+from cliente
+join pedido on cliente.id = pedido.id_cliente 
+join item_carrinho on cliente.id = item_carrinho.id_cliente 
+join produto on item_carrinho.id_produto = produto.id
+where pedido.id = 952;
+
+-- 17
+select cliente.id, cliente.nome, max(pedido.data_criacao) as data_ultima_compra_2022
+from cliente
+join pedido on cliente.id = pedido.id_cliente
+where pedido.data_criacao between '2022-01-01' and '2022-12-31'
+group by cliente.id, cliente.nome
+order by data_ultima_compra_2022;
+
+-- 18
+select cliente.nome, sum(item_carrinho.quantidade * produto.valor) as valor_total_gasto
+from cliente
+join pedido on cliente.id = pedido.id_cliente
+join item_carrinho on cliente.id = item_carrinho.id_cliente 
+join produto on item_carrinho.id_produto = produto.id 
+where date_part('year', pedido.data_criacao) = 2023
+group by cliente.id, cliente.nome
+order by valor_total_gasto desc limit 10;
+
+-- 19
+select produto.descricao, sum(item_carrinho.quantidade) as qtd_vendida,
+sum(item_carrinho.quantidade*produto.valor) as valor_total_vendas
+from produto
+join item_carrinho on item_carrinho.id_produto = produto.id 
+where date_part('year', item_carrinho.data_insercao) = 2023
+group by produto.descricao
+order by valor_total_vendas desc limit 10;
+
 -- 20
 select ((sum(ip.quantidade * ip.valor)-sum(cp.valor))/count(ped.id)) as ticket_medio from pedido ped
 	inner join item_pedido ip  on ped.id = ip.id_pedido

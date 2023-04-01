@@ -48,8 +48,8 @@ select c.id, c.nome, c.cpf, count(distinct ic.id_produto) as quant_prod_diferent
 from cliente c 
 inner join item_carrinho ic on ic.id_cliente = c.id 
 inner join produto p on p.id = ic.id_produto
-group by c.id 
-order by count(p);
+group by c.id
+order by count(ic.id_produto) desc;
 
 -- 13
 select item_carrinho.id_produto, produto.descricao, item_carrinho.data_insercao, item_carrinho.id_cliente, cliente.nome

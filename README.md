@@ -28,4 +28,3 @@ Utilizando o banco de dados da primeira parte do projeto, ou o disponibilizado e
 22. Listar TOP 10 cupons mais utilizados e o total descontado por eles.
 23. Listar cupons que foram utilizados mais que seu limite;
 24. Listar todos os ids dos pedidos que foram feitos por pessoas que moram em São Paulo (unidade federativa, uf, SP) e compraram o produto com código de barras '97692630963921';
-25. Faça um relatório de sua escolha, crie uma view para ele e faça uma consulta nessa view;
